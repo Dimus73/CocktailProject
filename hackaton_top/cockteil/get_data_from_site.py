@@ -1,12 +1,10 @@
 from django.shortcuts import render
-from .models import *
-from .forms import SetSearchForm
 import requests
 import json
 import time
 
 menu = [{'title': "Home", 'url_name': 'main_page_path'},
-        {'title': "Ingradients", 'url_name': 'ingradients_list_path'},
+        # {'title': "Add new task", 'url_name': 'add_task_path'},
         # {'title': "Add category", 'url_name': 'add_category'},
         # {'title': "Войти", 'url_name': 'login'}
         ]
@@ -47,12 +45,8 @@ def get_and_save_external_data():
 
 
 def main_page(request):
+    all_ingr = {'ingredients': []}
+
+
     context = {'menu': menu}
     return render(request, 'cockteil/main_page.html', context)
-
-def ingradients_list(request):
-    title = "Ingradients list"
-    ingr_list = Ingredients.objects.all()
-    f=SetSearchForm()
-    context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f}
-    return render(request, 'cockteil/ingradients_list.html', context)
