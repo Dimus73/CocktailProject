@@ -51,8 +51,21 @@ def main_page(request):
     return render(request, 'cockteil/main_page.html', context)
 
 def ingradients_list(request):
+    if request.method == 'POST':
+        print(f'Пост запрос. будем отбирать\nПришло  IngradientName:{request.POST}')
+        request_data = request.POST
+        ingr_list = Ingredients.objects.all()
+        if not 'my_button' in request_data:
+            if request_data['ingradient_name']:
+                ingr_list=ingr_list.filter(name__icontains=request_data['ingradient_name'])
+            if request_data['categories']:
+                ingr_list=ingr_list.filter(type=request_data['categories'])
+            f = SetSearchForm(request.POST) 
+        else:
+            f = SetSearchForm() 
+    else:
+       ingr_list = Ingredients.objects.all()
+       f=SetSearchForm()
     title = "Ingradients list"
-    ingr_list = Ingredients.objects.all()
-    f=SetSearchForm()
     context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f}
     return render(request, 'cockteil/ingradients_list.html', context)
