@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from .models import *
-from .forms import SetSearchForm
+from .forms import SetSearchForm, CocktailSerchNameForm, CocktailSerchIngradientForm
 import requests
 import json
 import time
 
 menu = [{'title': "Home", 'url_name': 'main_page_path'},
         {'title': "Ingradients", 'url_name': 'ingradients_list_path'},
-        # {'title': "Add category", 'url_name': 'add_category'},
+        {'title': "Cocktail search", 'url_name': 'search_cocktail_path'},
         # {'title': "Войти", 'url_name': 'login'}
         ]
 
@@ -90,3 +90,15 @@ def ingradients_list(request):
     title = "Ingradients list"
     context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/ingradients_list.html', context)
+
+
+
+def search_cocktail(request):
+    title = "Search page"
+    search_list=[]
+    f_n = CocktailSerchNameForm()
+    f_i = CocktailSerchIngradientForm()
+    f = {'f_n':f_n, 'f_i':f_i}
+    transit={}
+    context = {'menu': menu, 'title':title, 'search_list':search_list, 'form':f, 'transit':transit}
+    return render(request, 'cockteil/search_cocktail.html', context)

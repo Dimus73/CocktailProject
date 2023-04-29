@@ -14,4 +14,22 @@ class SetSearchForm(forms.Form):
         self.fields['only_bar'].initial = False
 
 
- 
+class CocktailSerchNameForm (forms.Form):
+    cocktail_part_name = forms.CharField(max_length=50, label="Search string", required=False)
+    required_css_class = "form-label"
+
+    def __init__(self, *args, **kwargs):
+        super(CocktailSerchNameForm, self).__init__(*args, **kwargs)
+        self.fields['cocktail_part_name'].widget.attrs.update({'class': 'form-control'})
+
+
+class CocktailSerchIngradientForm (forms.Form):
+    bar_list = Ownbar.objects.all().values_list('ingradient')
+    ingr_list = Ingredients.objects.all().filter (pk__in=bar_list)
+
+    ingradient         = forms.ModelChoiceField (queryset=ingr_list, empty_label='choice', required=False )
+    required_css_class = "form-label55"
+
+    def __init__(self, *args, **kwargs):
+        super(CocktailSerchIngradientForm, self).__init__(*args, **kwargs)
+        self.fields['ingradient'].widget.attrs.update({'class': 'form-select'})

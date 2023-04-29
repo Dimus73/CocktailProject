@@ -1,0 +1,35 @@
+{% extends 'cockteil/base.html' %}
+ 
+{% block content %}
+<div class="row" style="margin-top:80px">
+	<h1>{{title}}</h1>
+</div>
+	<div class="row">
+		<div class="col">
+			<form action="{% url 'ingradients_list_path' %}" method="post" class="form-floating row g-6 p-4 ">
+				{% csrf_token %}
+				{{ form.f_n.as_p }}
+				<div class="span2">
+					<button class="btn btn-primary g-2" type="submit"  value="1" name="search_n"> Search</button>
+					<button class="btn btn-primary g-2" type="submit" value="2" name="clear_n"> Clear</button>
+				</div>
+			</form>
+		</div>
+		<div class="col">
+			<form action="{% url 'ingradients_list_path' %}" method="post" class="form-floating row g-6 p-4 ">
+				{% csrf_token %}
+				{{ form.f_i.as_p }}
+				<div class="span2">
+					<button class="btn btn-primary g-2" type="submit"  value="3" name="search_i"> Search</button>
+					<button class="btn btn-primary g-2" type="submit" value="4" name="clear_i"> Clear</button>
+				</div>
+				</form>
+		</div>
+  </div>
+<div class="container" style="margin-top:0px">
+	<div class="row">
+    <div class="col">
+		</div>
+	</div>
+</div>
+{% endblock %}

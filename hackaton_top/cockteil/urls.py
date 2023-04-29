@@ -21,4 +21,5 @@ urlpatterns = [
     # path('add_task/', views.add_task, name="add_task_path" ),
     path('', views.main_page, name="main_page_path" ),
     path('ingradients_list/', views.ingradients_list, name="ingradients_list_path" ),
+    path('search_cocktail/', views.search_cocktail, name="search_cocktail_path" ),
 ]
