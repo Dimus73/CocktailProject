@@ -56,16 +56,33 @@ def ingradients_list(request):
         request_data = request.POST
         ingr_list = Ingredients.objects.all()
         if not 'my_button' in request_data:
+            if 'button_id' in request_data:
+                item=''
+                try:
+                    print("***********Ищем инградиент")
+                    item=Ingredients.objects.get(pk=int(request_data['button_id']))
+                except Ingredients.DoesNotExis:
+                    pass 
+                if item:
+                    try:
+                        print("**********Ищем в баре", item.pk)
+                        v = Ownbar.objects.get(pk=item.pk)
+                    except Ownbar.DoesNotExist:
+                        b = Ownbar(ingradient=item, quantity=0)
+                        b.save()
             if request_data['ingradient_name']:
                 ingr_list=ingr_list.filter(name__icontains=request_data['ingradient_name'])
             if request_data['categories']:
                 ingr_list=ingr_list.filter(type=request_data['categories'])
+            transit={'ingradient_name':request_data['ingradient_name'], 'categories':request_data['categories']}
             f = SetSearchForm(request.POST) 
         else:
+            transit={'ingradient_name':'', 'categories':''}
             f = SetSearchForm() 
     else:
        ingr_list = Ingredients.objects.all()
        f=SetSearchForm()
+       transit={'ingradient_name':'', 'categories':''}
     title = "Ingradients list"
-    context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f}
+    context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/ingradients_list.html', context)

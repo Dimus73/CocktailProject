@@ -21,6 +21,7 @@
 					<th>Category</th>
 					<th>Alcohol</th>
 					<th>ABV</th>
+					<th></th>
 					</tr>
 					{% for p in ingr_list%}
 						<tr>
@@ -28,6 +29,18 @@
 							<td>{{p.type.name}}</td>
 							<td>{{p.is_alcohol}}</td>
 							<td>{{p.abv}}</td>
+							{% if not p.is_it_in_bar %}
+								<td>
+									<form action="{% url 'ingradients_list_path' %}" method = "post">
+										{% csrf_token %}
+										<input type="hidden" name="ingradient_name" value="{{ transit.ingradient_name }}">
+										<input type="hidden" name="categories" value="{{ transit.categories }}">
+										<button class="btn btn-info" type="submit" value="{{p.pk}}" name="button_id">  To bar </button>
+									</form>
+								</td>
+							{% else %}
+								<td class="Warning">it's in the bar</td>
+							{% endif %}
 						</tr>
 					{% endfor %}
 			</table>

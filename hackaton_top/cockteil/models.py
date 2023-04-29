@@ -22,11 +22,21 @@ class Ingredients (models.Model):
         return self.name
     def is_alcohol(self):
         return 'alcoholic' if self.alcohol else 'non-alcoholic'
+    def is_it_in_bar(self):
+        try:
+            Ownbar.objects.get(ingradient=self.pk)
+            return True
+        except Ownbar.DoesNotExist:
+            return False
 
 
-class ownbar (models.Model):
+class Ownbar (models.Model):
     ingradient     = models.ForeignKey(Ingredients, on_delete=models.DO_NOTHING)
     quantity       = models.IntegerField (default=0)
+
+    def __str__(self):
+        return self.ingradient.name
+
 
 
 
