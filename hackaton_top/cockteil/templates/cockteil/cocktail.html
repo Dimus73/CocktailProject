@@ -1,0 +1,34 @@
+{% extends 'cockteil/base.html' %}
+ 
+{% block content %}
+<h1>{{title}}</h1>
+<div class="container">
+	<div class="row">
+    <div class="col">
+			<table class="table table-striped table-hover">
+				<tr>
+					<th>Name</th>
+					<th>Glass type</th>
+					{% while content.ingredient{i}!=Null %}:
+						<th>Intedient_{i}</th>
+						i+=1
+					{% endwhile %}	
+                    <th>Instruction</th>
+					</tr>
+						<tr>
+							<td>{{content.strDrink}}</td>
+							<td>{{content.strGlass}}</td>
+							<td>{{content.strInstructions}}</td>
+							{% while content.ingredient{i}!=Null %}:
+							<th>
+							i+=1
+							<td>{{content.strIngredient{{i}}}}</td>
+							{% endwhile %}
+
+						</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

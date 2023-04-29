@@ -16,8 +16,8 @@
 			left: 0;
 			width: 100vw;
 			height: 100vh;
-			background-image: url("{% static 'cockteil/imag/fon.jpg' %}");
-			background-size: cover;
+			/* background-image: url("{% static 'cockteil/imag/fon.jpg' %}"); */
+			/* background-size: cover; */
 			z-index: 0;
 		}
 		
@@ -25,8 +25,9 @@
 </head>
 <body>
 	<div id="bground" class="bg-image shadow-2-strong"></div>
+	div class="text-bg-dark p-3"
 	{% block mainmenu %}
-	<nav class="navbar fixed-top navbar-expand-sm bg-body-tertiary">
+	<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

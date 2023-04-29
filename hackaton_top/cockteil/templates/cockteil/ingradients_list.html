@@ -28,10 +28,9 @@
 					<th></th>
 					</tr>
 					{% for p in ingr_list%}
-						<tr>
-							<td >{{p.name}}</td>
+							<td><a href="/ingradients_list/{{p.idIngredient}}">{{ p.name }} </a></td>
 							<td>{{p.type.name}}</td>
-							<td>{{p.is_alcohol}}</td>
+							<td>{{p.is_alcohol}}</td> 
 							<td>{{p.abv}}</td>
 							{% if not p.is_it_in_bar %}
 								<td>

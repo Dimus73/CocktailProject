@@ -6,7 +6,7 @@ import json
 import time
 
 menu = [{'title': "Home", 'url_name': 'main_page_path'},
-        {'title': "Ingradients", 'url_name': 'ingradients_list_path'},
+        {'title': "Ingredients", 'url_name': 'ingradients_list_path'},
         {'title': "Cocktail search", 'url_name': 'search_cocktail_path'},
         # {'title': "Войти", 'url_name': 'login'}
         ]
@@ -35,7 +35,7 @@ def get_and_save_external_data():
             s = json.loads(st)
             all_ingr['ingredients'].append(s['ingredients'][0])
         except TypeError:
-            print(f'Похоже нет инградиента с номером {a}')
+            print(f'Похоже нет ингредиента с номером {a}')
         print(s)
         time.sleep(2)
 
@@ -59,7 +59,7 @@ def ingradients_list(request):
             if 'button_id' in request_data:
                 item=''
                 try:
-                    print("***********Ищем инградиент")
+                    print("***********Ищем ингредиент")
                     item=Ingredients.objects.get(pk=int(request_data['button_id']))
                 except Ingredients.DoesNotExis:
                     pass 
@@ -111,15 +111,20 @@ def search_cocktail(request):
     search_list=get_outside_request(url, param)
     print (search_list)
 
-    # #Search by ingradient
-    # url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
-    # param = {'s':'margarita'}
-    # search_list=get_outside_request(url, param)
-    # print (search_list)
-
     f_n = CocktailSerchNameForm()
     f_i = CocktailSerchIngradientForm()
     f = {'f_n':f_n, 'f_i':f_i}
     transit={}
     context = {'menu': menu, 'title':title, 'search_list':search_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/search_cocktail.html', context)
+
+
+def cocktail(request, idDrink):
+    a=Recipe.objects.get(idDrink=idDrink)
+    context = {'menu': menu, 'title':a.strDrink, "content": a}
+    return render(request, 'cockteil/cocktail.html', context)
+
+def ingredient(request, idIngredient):
+    a=Ingredients.objects.get(idIngredient=idIngredient)
+    context = {'menu': menu, 'title':a.name, "content": a}
+    return render(request, 'cockteil/ingredient.html', context)

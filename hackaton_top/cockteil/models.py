@@ -5,10 +5,10 @@ from django.db import models
 
 class IngredientsType (models.Model):
     name           = models.CharField (max_length=100, blank=False, db_index=True)
-
+    image_url      = models.URLField (blank=True, null=True)  
     def __str__(self):
         return self.name
-
+  
 
 class Ingredients (models.Model):
     idIngredient   = models.IntegerField (blank = True, null=True)
@@ -38,6 +38,34 @@ class Ownbar (models.Model):
         return self.ingradient.name
 
 
+class Recipe(models.Model):
+    idDrink = models.IntegerField()
+    strDrink       = models.CharField (max_length=150, blank=False, db_index=True)
+    idIngredient   = models.IntegerField (blank = True, null=True)
+    strGlass       = models.CharField ()
+    strInstructions = models.TextField()
+    strDrinkThumb   = models.URLField()
+    strIngredient1 = models.CharField ()
+    strIngredient2 = models.CharField ()
+    strIngredient3 = models.CharField ()
+    strIngredient4 = models.CharField ()
+    strIngredient5 = models.CharField ()
+    strIngredient6 = models.CharField ()
+    strIngredient7 = models.CharField ()
+    strIngredient8 = models.CharField ()
+    strMeasure1 = models.CharField ()
+    strMeasure2 = models.CharField ()
+    strMeasure3 = models.CharField ()
+    strMeasure4 = models.CharField ()
+    strMeasure5 = models.CharField ()
+    strMeasure6 = models.CharField ()
+    strMeasure7 = models.CharField ()
+    strMeasure8 = models.CharField ()
 
 
-    
+
+
+
+
+    def __str__(self):
+        return f'{self.strDrink } {self.strGlass} {self.strInstructions} {self.strDrinkThumb} {self.strIngredient1} {self.strIngredient2}'

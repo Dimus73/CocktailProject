@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'hackaton.wsgi.application'
 DATABASES = { 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cocktail',
-        'USER': 'dmitryprigozhin',
-        'PASSWORD': '',
+        'NAME': 'Cocktails',
+        'USER': 'postgres',
+        'PASSWORD': 220879,
         'HOST': 'localhost',
         'PORT': '5432',
     }

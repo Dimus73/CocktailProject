@@ -1,0 +1,22 @@
+{% extends 'cockteil/base.html' %}
+ 
+{% block content %}
+<div class="row" style="margin-top:80px">
+	<h1>{{title}}</h1>
+</div>
+<div class="container">
+    <div class="row">
+    <div class="text-bg-dark p-3"><td class="text-bg-dark p-3">CLASS: {{content.type}}</td>
+    </div>
+    </div>
+        <div class="row py-5 justify-content-center">
+            <div class="col-10" >  
+                <td>{{content.description}}  <td>
+            </div> 
+            <div class="col-2"> 
+                <img src="{{content.type.image_url}}"  width=100% alt="{{content.type}}">
+            </div>
+        </div> 
+ </div>
+
+{% endblock %}
