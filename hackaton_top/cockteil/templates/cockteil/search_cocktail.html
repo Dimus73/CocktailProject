@@ -6,7 +6,7 @@
 </div>
 	<div class="row">
 		<div class="col">
-			<form action="{% url 'ingradients_list_path' %}" method="post" class="form-floating row g-6 p-4 ">
+			<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating row g-6 p-4 ">
 				{% csrf_token %}
 				{{ form.f_n.as_p }}
 				<div class="span2">
@@ -16,7 +16,7 @@
 			</form>
 		</div>
 		<div class="col">
-			<form action="{% url 'ingradients_list_path' %}" method="post" class="form-floating row g-6 p-4 ">
+			<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating row g-6 p-4 ">
 				{% csrf_token %}
 				{{ form.f_i.as_p }}
 				<div class="span2">
@@ -33,8 +33,18 @@
 					<div class="card mb-4">
 						<img src="{{p.strDrinkThumb}}" class="card-img-top" alt="No image">
 						<div class="card-body">
-							<h5 class="card-title">{{p.strDrink}}</h5>
-							<a href="#" class="btn btn-primary">View details</a>
+							<h6 class="card-text ">{{p.strDrink}}</h6>
+							<div class="row">
+								<div class="col-6"> <a style="font-size: 10px;" href="#" class="btn btn-primary">View details</a> </div>
+								<div class="col-6">
+									<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating ">
+										{% csrf_token %}
+ 											<button style="font-size: 10px;" class="btn btn-primary" type="submit"  value="{{p.idDrink}}" name="add_to_base"> Add to favorites</button>
+											 <input type="hidden" name="cocktail_part_name" value="{{ transit.cocktail_part_name }}">
+											 <input type="hidden" name="ingradient" value="{{ transit.ingradient }}">
+									 </form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
