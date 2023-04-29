@@ -91,11 +91,32 @@ def ingradients_list(request):
     context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/ingradients_list.html', context)
 
+#Query Response Function
+def get_outside_request(url, param):
+    r = requests.get(url, param)
+    if r.status_code == 200:
+        content = json.loads(r.content)
+        r.close()
+        return (content)
+    else:
+        print(f'Parametr {param}. No ansver')
+    r.close()
 
 
 def search_cocktail(request):
     title = "Search page"
-    search_list=[]
+    #Search by name
+    url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+    param = {'s':'margarita'}
+    search_list=get_outside_request(url, param)
+    print (search_list)
+
+    # #Search by ingradient
+    # url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+    # param = {'s':'margarita'}
+    # search_list=get_outside_request(url, param)
+    # print (search_list)
+
     f_n = CocktailSerchNameForm()
     f_i = CocktailSerchIngradientForm()
     f = {'f_n':f_n, 'f_i':f_i}

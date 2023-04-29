@@ -10,10 +10,15 @@ django.setup()
 
 from cockteil.models import *
 
-
+#Искать по инградиенту
 url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
 # param = {'iid': 552}
 param = {'i':'Vodka'}
+
+#Искать по названию
+url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+# param = {'iid': 552}
+param = {'s':'margarita'}
 
 
 def get_outside_request(url, param):
