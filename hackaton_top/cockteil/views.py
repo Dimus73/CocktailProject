@@ -71,18 +71,22 @@ def ingradients_list(request):
                         b = Ownbar(ingradient=item, quantity=0)
                         b.save()
             if request_data['ingradient_name']:
-                ingr_list=ingr_list.filter(name__icontains=request_data['ingradient_name'])
+                ingr_list = ingr_list.filter(name__icontains=request_data['ingradient_name'])
             if request_data['categories']:
-                ingr_list=ingr_list.filter(type=request_data['categories'])
-            transit={'ingradient_name':request_data['ingradient_name'], 'categories':request_data['categories']}
+                ingr_list = ingr_list.filter(type=request_data['categories'])
+            if request_data.get('only_bar','False') != 'False':
+                print("Показываем только в баре", type(request_data.get('only_bar',False)))
+                bar_list = Ownbar.objects.all().values_list('ingradient')
+                ingr_list = ingr_list.filter (pk__in=bar_list)
+            transit={'ingradient_name':request_data['ingradient_name'], 'categories':request_data['categories'], 'only_bar':request_data.get('only_bar',False)}
             f = SetSearchForm(request.POST) 
         else:
-            transit={'ingradient_name':'', 'categories':''}
+            transit={'ingradient_name':'', 'categories':'', 'only_bar':False}
             f = SetSearchForm() 
     else:
        ingr_list = Ingredients.objects.all()
        f=SetSearchForm()
-       transit={'ingradient_name':'', 'categories':''}
+       transit={'ingradient_name':'', 'categories':'', 'only_bar':False}
     title = "Ingradients list"
     context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/ingradients_list.html', context)

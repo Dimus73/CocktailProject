@@ -6,10 +6,14 @@
 </div>
 <form action="{% url 'ingradients_list_path' %}" method="post" class="form-floating row g-6 p-4 col-6">
 	<div class="col">
-		{% csrf_token %}
-		{{ form.as_table }}
-		<button class="btn btn-primary g-2" type="submit"  value="357" name="search"> Search</button>
-		<button class="btn btn-primary g-2" type="submit" value="356" name="my_button"> Clear</button>
+		<div class="col">
+			{% csrf_token %}
+			{{ form.as_table }}
+	  </div>
+		<div class="col">
+			<button class="btn btn-primary g-2" type="submit"  value="357" name="search"> Search</button>
+			<button class="btn btn-primary g-2" type="submit" value="356" name="my_button"> Clear</button>
+		</div>	
 	</div>
 </form>
 <div class="container" style="margin-top:0px">
@@ -35,6 +39,7 @@
 										{% csrf_token %}
 										<input type="hidden" name="ingradient_name" value="{{ transit.ingradient_name }}">
 										<input type="hidden" name="categories" value="{{ transit.categories }}">
+										<input type="hidden" name="only_bar" value="{{ transit.only_bar }}">
 										<button class="btn btn-info" type="submit" value="{{p.pk}}" name="button_id">  To bar </button>
 									</form>
 								</td>
