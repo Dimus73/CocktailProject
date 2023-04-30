@@ -8,11 +8,11 @@ import time
 menu = [{'title': "Home", 'url_name': 'main_page_path'},
         {'title': "Ingredients", 'url_name': 'ingradients_list_path'},
         {'title': "Cocktail search", 'url_name': 'search_cocktail_path'},
-        # {'title': "Войти", 'url_name': 'login'}
+
         ]
 
-url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
-param = {'iid': 552}
+# url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
+# param = {'iid': 552}
 
 
 def get_outside_request(url, param):
@@ -119,12 +119,172 @@ def search_cocktail(request):
     return render(request, 'cockteil/search_cocktail.html', context)
 
 
-def cocktail(request, idDrink):
-    a=Recipe.objects.get(idDrink=idDrink)
-    context = {'menu': menu, 'title':a.strDrink, "content": a}
-    return render(request, 'cockteil/cocktail.html', context)
+# def cocktail(request, idDrink):
+
+#     a=Recipe.objects.get(idDrink=idDrink)
+#     context = {'menu': menu, 'title':a.strDrink, "content": a}
+#     return render(request, 'cockteil/cocktail.html', context)
 
 def ingredient(request, idIngredient):
     a=Ingredients.objects.get(idIngredient=idIngredient)
     context = {'menu': menu, 'title':a.name, "content": a}
     return render(request, 'cockteil/ingredient.html', context)
+
+
+
+def get_outside_request(url, param):
+    r = requests.get(url, param)
+    if r.status_code == 200:
+        content = r.content
+        r.close()
+        return (content)
+    else:
+        print(f'Parametr {param}. No ansver')
+    r.close()
+
+
+def get_and_save_external_data():
+
+    for a in range(1, 1000):
+        param['iid'] = a
+        st = get_outside_request(url, param)
+        try:
+            s = json.loads(st)
+            all_ingr['ingredients'].append(s['ingredients'][0])
+        except TypeError:
+            print(f'Похоже нет инградиента с номером {a}')
+        print(s)
+        time.sleep(2)
+
+    with open("ingradients.json", 'w') as f:
+        json.dump(all_ingr, f, indent=3)
+
+# Create your views here.
+# *********************
+
+
+#Query Response Function
+def get_outside_request(url, param):
+    r = requests.get(url, param)
+    if r.status_code == 200:
+        content = json.loads(r.content)
+        r.close()
+        return (content)
+    else:
+        print(f'Parametr {param}. No ansver')
+    r.close()
+
+def cocktail(request, idDrink):
+    url="https://www.thecocktaildb.com/api/json/v1/1/lookup.php"
+    param = {'i':idDrink}
+    cocktail_recip=get_outside_request(url, param)
+    cocktail_recipe=cocktail_recip['drinks'][0]
+
+    cock_list={}
+    cock_list['name']         = cocktail_recipe['strDrink']
+    cock_list['type']         = cocktail_recipe['strCategory']
+    cock_list['alcohol']      = cocktail_recipe['strAlcoholic']
+    cock_list['glass']        = cocktail_recipe['strGlass']
+    cock_list['instructions'] = cocktail_recipe['strInstructions']
+    cock_list['image']        = cocktail_recipe['strDrinkThumb']
+    cock_list['ingradient']   = {}
+    for a in range(1,16):
+        key= 'strIngredient' + str(a)
+        value= 'strMeasure'  + str(a)
+        if not cocktail_recipe[key] is None:
+            cock_list['ingradient'][cocktail_recipe[key]]=cocktail_recipe[value]
+
+
+    context={'menu': menu, 'title':cocktail_recipe['strDrink'], "content": cock_list}
+    return render(request, 'cockteil/cocktail.html', context)
+    
+
+
+# def search_cocktail(request):
+#     if request.method == 'POST':
+#         print(f'Пост запрос. будем отбирать\nПришло *****: {request.POST}')
+#         request_data = request.POST
+#         print (request_data)
+
+#         if request_data.get('cocktail_part_name',False):
+#             print ("***********Зашли в выбор названию")
+#             url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+#             param = {'s':request_data['cocktail_part_name']}
+#             f_n = CocktailSerchNameForm(request.POST)
+#             transit={'cocktail_part_name':request_data['cocktail_part_name'], 'ingradient':''}
+
+#         else:
+#             f_n = CocktailSerchNameForm()
+
+#         if request_data.get('ingradient',False):
+#             print ("***********Зашли в выбор инградиенту")
+#             try:
+#                 ingadient = Ingredients.objects.get(pk=int(request_data['ingradient']))
+#                 url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
+#                 param = {'i':ingadient}
+#                 f_i = CocktailSerchIngradientForm(request.POST)
+#                 transit={'cocktail_part_name':'', 'ingradient':request_data['ingradient']}
+#             except Ingredients.DoesNotExist:
+#                 pass
+#         else:
+#             f_i = CocktailSerchIngradientForm()
+
+#         if request_data.get('add_to_base',False):
+#             print ("***********Зашли в добавление в базу")
+#             try:
+#                 url_coct = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
+#                 param_coct = {'i':int(request_data['add_to_base'])}
+#                 coct_info=get_outside_request(url_coct, param_coct)
+#                 print("**************** Запро конкретного коктеляё\n",coct_info)
+#                 a = FavoriteCocktails(idDrink = coct_info['drinks'][0]['idDrink'],strDrink = coct_info['drinks'][0]['strDrink'] , original_dict = coct_info['drinks'][0])
+#                 a.save()
+#             except FavoriteCocktails.DoesNotExist:
+#                 print ("Не получилось записать в базу любымый коктель")
+                
+
+#         if request_data.get('clear_n',False) or request_data.get('clear_i',False):
+#             search_list=""
+#         else:
+#             search_list=get_outside_request(url, param)
+#         print("***********Прошли ифы")
+
+#     else:
+#         search_list=""
+#         transit={}
+#         f_n = CocktailSerchNameForm()
+#         f_i = CocktailSerchIngradientForm()
+
+            
+
+#     title = "Search cockteil page"
+
+#     f = {'f_n':f_n, 'f_i':f_i}
+#     context = {'menu': menu, 'title':title, 'search_list':search_list, 'form':f, 'transit':transit}
+#     return render(request, 'cockteil/search_cocktail.html', context)
+
+
+# def favorites(request):
+#     cock_list={}
+#     cock_data = FavoriteCocktails.objects.all()
+#     for k in cock_data:
+#         cock_list['name']         = k['strDrink']
+#         cock_list['type']         = k['strCategory']
+#         cock_list['alcohol']      = k['Alcoholic']
+#         cock_list['glass']        = k['strGlass']
+#         cock_list['instructions'] = k['strInstructions']
+#         cock_list['image']        = k['strDrinkThumb']
+#         cock_list['ingradient']   = {}
+#         for a in range(1,16):
+#             key= 'strIngredient' + str(a)
+#             value= 'strMeasure'  + str(a)
+#             cock_list['ingradient'][key]=value
+
+
+
+
+#     search_list=""
+#     transit={}
+#     title = "Favorits cockteil page"
+#     f = {}
+#     context = {'menu': menu, 'title':title, 'd_list':cock_list, 'form':f, 'transit':transit}
+#     return render(request, 'cockteil/favorites.html', context)

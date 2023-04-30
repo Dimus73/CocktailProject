@@ -53,3 +53,5 @@ print (ansver)
 st = json.loads(ansver)
 j_st=json.dumps(st,indent=2)
 print (j_st)
+with open('bbbase.json') as f:
+    json.dump(j_st, f, indent=2)
