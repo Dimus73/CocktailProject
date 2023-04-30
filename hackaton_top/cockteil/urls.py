@@ -23,5 +23,6 @@ urlpatterns = [
     path('ingradients_list/', views.ingradients_list, name="ingradients_list_path" ),
     path('search_cocktail/', views.search_cocktail, name="search_cocktail_path" ),
     path('favorites/', views.favorites, name="favorites_path" ),
-    path('ingradients_list/<int:idIngredient>', views.ingredient, name="ingradient_path")
+    path('ingradients_list/<int:idIngredient>', views.ingredient, name="ingradient_path"),
+    path('search_cocktail/<int:idDrink>', views.cocktail, name="cocktail_path"),
 ]

@@ -1,12 +1,13 @@
 {% extends 'cockteil/base.html' %}
  
 {% block content %}
-<div class="row" style="margin-top:80px">
-	<h1>{{title}}</h1>
+<div class="container" style="margin-top:0px">
+	<div class="row" style="margin-top:0px">
+<h1>{{title}}</h1>
 </div>
 	<div class="row">
 		<div class="col">
-			<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating row g-6 p-4 ">
+			<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating row g-6 pb-4">
 				{% csrf_token %}
 				{{ form.f_n.as_p }}
 				<div class="span2">
@@ -16,7 +17,7 @@
 			</form>
 		</div>
 		<div class="col">
-			<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating row g-6 p-4 ">
+			<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating row g-6 pb-4 ">
 				{% csrf_token %}
 				{{ form.f_i.as_p }}
 				<div class="span2">
@@ -26,7 +27,7 @@
 				</form>
 		</div>
   </div>
-<div class="container" style="margin-top:0px">
+
 	<div class="row">
 		{% for p in search_list.drinks %}
 				<div class="col-12 col-sm-6 col-lg-3 col-lg-2">
@@ -35,7 +36,7 @@
 						<div class="card-body">
 							<h6 class="card-text ">{{p.strDrink}}</h6>
 							<div class="row">
-								<div class="col-6"> <a style="font-size: 10px;" href="#" class="btn btn-primary">View details</a> </div>
+								<div class="col-6"> <a style="font-size: 10px;" href="{% url 'cocktail_path' p.idDrink %}" class="btn btn-primary">View details</a> </div>
 								<div class="col-6">
 									<form action="{% url 'search_cocktail_path' %}" method="post" class="form-floating ">
 										{% csrf_token %}
