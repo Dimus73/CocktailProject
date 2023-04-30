@@ -27,7 +27,7 @@ class CocktailSerchIngradientForm (forms.Form):
     bar_list = Ownbar.objects.all().values_list('ingradient')
     ingr_list = Ingredients.objects.all().filter (pk__in=bar_list)
 
-    ingradient         = forms.ModelChoiceField (queryset=ingr_list, empty_label='choice', required=False )
+    ingradient         = forms.ModelChoiceField (queryset=ingr_list, label="Ingredient", empty_label='choice', required=False )
     required_css_class = "form-label55"
 
     def __init__(self, *args, **kwargs):

@@ -5,6 +5,7 @@ from django.db import models
 
 class IngredientsType (models.Model):
     name           = models.CharField (max_length=100, blank=False, db_index=True)
+    image_url      = models.URLField (blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -36,6 +37,12 @@ class Ownbar (models.Model):
 
     def __str__(self):
         return self.ingradient.name
+
+
+class FavoriteCocktails(models.Model):
+    idDrink                               =models.IntegerField (blank = True, null=True)
+    strDrink                              =models.CharField (max_length=100, blank=True, null=True, db_index=True)
+    original_dict                         =models.TextField()
 
 
 
