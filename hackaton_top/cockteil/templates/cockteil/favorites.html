@@ -4,10 +4,38 @@
 <h1>{{title}}</h1>
 <h1> "Это страница любимыми"</h1><br>
 <div class="container">
-	<div class="row">
-    <div class="col">
-			<p>Это внутри контейнера</p>
+	{% for p in d_list %}
+		<div class="row">
+			<div class="col">
+				<img src="{{p.image}}" alt="No image">
+			</div>
+			<div class="col">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Name</td>
+							<td>{{ p.name }}</td>
+						</tr>
+						<tr>
+							<td>Category</td>
+							<td>{{ p.strCategory }}</td>
+						</tr>
+						<tr>
+							<td>Alcoholic</td>
+							<td>{{ p.alcoholic }}</td>
+						</tr>
+						<tr>
+							<td>Glass</td>
+							<td>{{p.glass}}</td>
+						</tr>
+						<tr>
+							<td>Instructions</td>
+							<td>{{p.instructions}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
+	{% endfor %}
 </div>
 {% endblock %}
