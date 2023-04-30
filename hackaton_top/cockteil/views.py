@@ -115,7 +115,6 @@ def search_cocktail(request):
             param = {'s':request_data['cocktail_part_name']}
             f_n = CocktailSerchNameForm(request.POST)
             transit={'cocktail_part_name':request_data['cocktail_part_name'], 'ingradient':''}
-
         else:
             f_n = CocktailSerchNameForm()
 
@@ -139,7 +138,9 @@ def search_cocktail(request):
                 param_coct = {'i':int(request_data['add_to_base'])}
                 coct_info=get_outside_request(url_coct, param_coct)
                 print("**************** Запро конкретного коктеляё\n",coct_info)
-                a = FavoriteCocktails(idDrink = coct_info['drinks'][0]['idDrink'],strDrink = coct_info['drinks'][0]['strDrink'] , original_dict = coct_info['drinks'][0])
+                a = FavoriteCocktails(idDrink = coct_info['drinks'][0]['idDrink'],
+                                      strDrink = coct_info['drinks'][0]['strDrink'] , 
+                                      original_dict = json.dumps(coct_info['drinks'][0], indent=2))
                 a.save()
             except FavoriteCocktails.DoesNotExist:
                 print ("Не получилось записать в базу любымый коктель")
@@ -147,6 +148,10 @@ def search_cocktail(request):
 
         if request_data.get('clear_n',False) or request_data.get('clear_i',False):
             search_list=""
+            transit={}
+            f_n = CocktailSerchNameForm()
+            f_i = CocktailSerchIngradientForm()
+
         else:
             search_list=get_outside_request(url, param)
         print("***********Прошли ифы")
@@ -167,21 +172,37 @@ def search_cocktail(request):
 
 
 def favorites(request):
-    cock_list={}
+    cock={}
+    cock_list={'ks':[]}
     cock_data = FavoriteCocktails.objects.all()
     for k in cock_data:
-        cock_list['name']         = k['strDrink']
-        cock_list['type']         = k['strCategory']
-        cock_list['alcohol']      = k['Alcoholic']
-        cock_list['glass']        = k['strGlass']
-        cock_list['instructions'] = k['strInstructions']
-        cock_list['image']        = k['strDrinkThumb']
-        cock_list['ingradient']   = {}
+        cock={}
+        print ("*************\n",k.original_dict,"\n********************")
+        s_js= json.loads(k.original_dict)
+        cock['name']         = s_js['strDrink']
+        cock['type']         = s_js['strCategory']
+        cock['alcohol']      = s_js['strAlcoholic']
+        cock['glass']        = s_js['strGlass']
+        cock['instructions'] = s_js['strInstructions']
+        cock['image']        = s_js['strDrinkThumb']
+        cock['ingradient']   = {}
         for a in range(1,16):
             key= 'strIngredient' + str(a)
             value= 'strMeasure'  + str(a)
-            cock_list['ingradient'][key]=value
+            if not s_js[key] is None:
+                cock['ingradient'][s_js[key]]=s_js[value]
+        cock_list['ks'].append(cock)
+    
+    for p in cock_list['ks']:
+        print ("*************\n",p,"\n********************")
 
+    print(cock_list)
+    # print( cock_data[0].original_dict)
+    # s=cock_data[0].original_dict
+    # print(s)
+    # s_js= json.loads(s)
+    # print (type(s_js),s_js)
+    # print( type( json.loads(cock_data[0].original_dict)))
 
 
 
@@ -191,3 +212,9 @@ def favorites(request):
     f = {}
     context = {'menu': menu, 'title':title, 'd_list':cock_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/favorites.html', context)
+
+
+def ingredient(request, idIngredient):
+    a=Ingredients.objects.get(pk=idIngredient)
+    context = {'menu': menu, 'title':a.name, "content": a}
+    return render(request, 'cockteil/ingredient.html', context)

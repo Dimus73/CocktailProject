@@ -1,38 +1,39 @@
 {% extends 'cockteil/base.html' %}
  
 {% block content %}
-<div class="container" style="margin-top:0px;">
-	<h1 class="">{{title}}</h1>
+<h1>{{title}}</h1>
+<h1> "Это страница с любимыми"</h1><br>
+<div class="container">
 	{% for p in d_list.ks %}
 		<div class="row">
-			<div class="col-md-4 col-sm-12">
-				<img class="img-thumbnail" width="100%" src="{{p.image}}" alt="No image">
+			<div class="col-4">
+				<img class="img-thumbnail mt-3" width="100%" src="{{p.image}}" alt="No image">
 			</div>
-			<div class="col-md-8 col-sm-12">
-				<table class="table bg-light">
+			<div class="col-8">
+				<table class="table">
 					<tbody>
 						<tr>
-							<td><b>Name</b></td>
+							<td>Name</td>
 							<td>{{ p.name }}</td>
 						</tr>
 						<tr>
-							<td><b>Category</b></td>
-							<td>{{ p.type }}</td>
+							<td>Category</td>
+							<td>{{ p.strCategory }}</td>
 						</tr>
 						<tr>
-							<td><b>Alcoholic</b></td>
-							<td>{{ p.alcohol }}</td>
+							<td>Alcoholic</td>
+							<td>{{ p.alcoholic }}</td>
 						</tr>
 						<tr>
-							<td><b>Glass</b></td>
+							<td>Glass</td>
 							<td>{{p.glass}}</td>
 						</tr>
 						<tr>
-							<td><b>Instructions</b></td>
+							<td>Instructions</td>
 							<td>{{p.instructions}}</td>
 						</tr>
 						<tr>
-							<td><b>Ingredients</b></td>
+							<td>Ingredients</td>
 							<td>
 								<table class="table">
 									{% for key, val in p.ingradient.items %}

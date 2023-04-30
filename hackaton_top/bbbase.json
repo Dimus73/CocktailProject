@@ -1,0 +1,294 @@
+{
+  "pict": [
+    {
+      "pk": 97,
+      "url_str": null,
+      "name": "Mix"
+    },
+    {
+      "pk": 120,
+      "url_str": null,
+      "name": "Mixer"
+    },
+    {
+      "pk": 124,
+      "url_str": null,
+      "name": "Others"
+    },
+    {
+      "pk": 118,
+      "url_str": "https://img.favpng.com/3/17/18/macaroon-petit-four-macaron-pastry-biscuits-png-favpng-eFZVFv2y8XDPyAgZ2NF7aShhC.jpg",
+      "name": "Confectionery"
+    },
+    {
+      "pk": 117,
+      "url_str": "https://img.favpng.com/3/17/18/macaroon-petit-four-macaron-pastry-biscuits-png-favpng-eFZVFv2y8XDPyAgZ2NF7aShhC.jpg",
+      "name": "Confectionery"
+    },
+    {
+      "pk": 116,
+      "url_str": "https://cdn.shoplightspeed.com/shops/636686/files/21900260/1600x2048x2/aperol-aperitivo-750-ml.jpg",
+      "name": "aperitif"
+    },
+    {
+      "pk": 115,
+      "url_str": "https://images.delightedcooking.com/vinegar.jpg",
+      "name": "Vinegar"
+    },
+    {
+      "pk": 114,
+      "url_str": "https://dobro.wine/upload/iblock/5cc/5cc3a82f3db244ed772287c76ca79970.jpg",
+      "name": "Port"
+    },
+    {
+      "pk": 113,
+      "url_str": "https://basket-02.wb.ru/vol169/part16919/16919676/images/big/1.jpg",
+      "name": "Tea"
+    },
+    {
+      "pk": 112,
+      "url_str": "https://papik.pro/uploads/posts/2022-01/1642342164_11-papik-pro-p-sakhar-klipart-11.png",
+      "name": "Sweet"
+    },
+    {
+      "pk": 111,
+      "url_str": "http://res.heraldm.com/content/image/2014/04/08/20140408000805_0.jpg",
+      "name": "Rice wine"
+    },
+    {
+      "pk": 110,
+      "url_str": "https://i.pinimg.com/736x/99/7a/03/997a03422bca0d840d84afa2c85113fd.jpg",
+      "name": "Fortified wine"
+    },
+    {
+      "pk": 109,
+      "url_str": "https://tkyarmarka.com/upload/iblock/523/u0i80jn0z7m5qds9mxjofoe930uv2hbe.jpeg",
+      "name": "Cola"
+    },
+    {
+      "pk": 108,
+      "url_str": "https://centaurusint.net/images/products/APE2739.png",
+      "name": "Aperitif"
+    },
+    {
+      "pk": 107,
+      "url_str": "https://cdn.shopify.com/s/files/1/2141/9909/products/bitter_truth_lemon_bitters.jpeg?v=1591901240",
+      "name": "Bitters"
+    },
+    {
+      "pk": 106,
+      "url_str": "https://f.vividscreen.info/soft/a7622cbc3b90ca1e07c8b4a8a5024898/Pinky-Flowers-768x1280.jpg",
+      "name": "Flower"
+    },
+    {
+      "pk": 105,
+      "url_str": "https://urbancordial.com/wp-content/uploads/2021/03/urban-cordial-winter-warmers-cordials-02-768x1098.jpg",
+      "name": "Cordial"
+    },
+    {
+      "pk": 104,
+      "url_str": "https://brander.lv/wp-content/uploads/2019/05/Blue.png",
+      "name": "Alcopop"
+    },
+    {
+      "pk": 103,
+      "url_str": "https://artcafe-royal.ru/wp-content/uploads/b/a/a/baa43ec73ac1d52e1c7680505d34470d.jpeg",
+      "name": "Stout"
+    },
+    {
+      "pk": 102,
+      "url_str": "https://4ssale.com/Documents/ProductImages/PD12278_Main.png",
+      "name": "Sugar"
+    },
+    {
+      "pk": 101,
+      "url_str": "https://kak2z.ru/my_img/img/2020/05/13/6aa70.jpg",
+      "name": "Schnapps"
+    },
+    {
+      "pk": 100,
+      "url_str": "https://24sum-time.ru/wp-content/uploads/2022/12/tekila-olmeca-0.7-l.jpg",
+      "name": "Tequila"
+    },
+    {
+      "pk": 99,
+      "url_str": "https://static.tildacdn.com/tild6333-3534-4837-b732-323363363435/_1.png",
+      "name": "Sauce"
+    },
+    {
+      "pk": 98,
+      "url_str": "https://www.captcaruana.com/wp-content/uploads/madeira/justinos-fine-medium-dry-madeira-75cl.jpg",
+      "name": "Fortified Wine"
+    },
+    {
+      "pk": 96,
+      "url_str": "https://s3.amazonaws.com/images.ecwid.com/images/36659119/1654548342.jpg",
+      "name": "Spice"
+    },
+    {
+      "pk": 95,
+      "url_str": "https://cdn.britannica.com/60/174560-050-5A33606F/cherries-Cluster.jpg",
+      "name": "Sherry"
+    },
+    {
+      "pk": 94,
+      "url_str": "https://www.zastavki.com/pictures/640x960/2021Food_Roasted_coffee_beans_in_a_mug_on_a_white_background_151273_30.jpg",
+      "name": "Coffee"
+    },
+    {
+      "pk": 93,
+      "url_str": "https://www.pngjoy.com/pngm/121/13904065_frutas-fruta-entera-o-en-zumo-png-download.png",
+      "name": "Juice"
+    },
+    {
+      "pk": 92,
+      "url_str": "https://avatars.dzeninfra.ru/get-zen_doc/1362253/pub_5e7f2c5a549f6e4aecfae886_5e7f2d026300d51ddf2f1f63/scale_1200",
+      "name": "Milk"
+    },
+    {
+      "pk": 91,
+      "url_str": "https://i.pinimg.com/736x/16/d2/57/16d257784e6ec2ab9a04f9a24688641f--rumchata-pudding-shots-rumchata-recipes.jpg",
+      "name": "Cream"
+    },
+    {
+      "pk": 90,
+      "url_str": "https://www.shawparth.com.au/wp-content/fancygallery/9/11/Capi_Soda_250_Hi1.jpg",
+      "name": "Soda"
+    },
+    {
+      "pk": 89,
+      "url_str": "https://blogs.missouristate.edu/hra/files/2016/04/red-wine-bottle-and-wine-glass-psd-b-e1461004974835-768x952.jpg",
+      "name": "Wine"
+    },
+    {
+      "pk": 88,
+      "url_str": "https://www.aquamaestro.com/media/catalog/product/cache/1/thumbnail/600x/392951836ea6af3c714f2ef54dab1abc/e/v/evian-1.5-l-still-pet-800x1084_1.jpg",
+      "name": "Mineral"
+    },
+    {
+      "pk": 87,
+      "url_str": "https://www.aquamaestro.com/media/catalog/product/cache/1/thumbnail/600x/392951836ea6af3c714f2ef54dab1abc/e/v/evian-1.5-l-still-pet-800x1084_1.jpg",
+      "name": "Water"
+    },
+    {
+      "pk": 86,
+      "url_str": "https://www.pngkey.com/png/full/69-692090_fanta-bottle-png-for-kids-soft-drinks-in.png",
+      "name": "Soft Drink"
+    },
+    {
+      "pk": 85,
+      "url_str": "https://cakes.ru/wp-content/uploads/2019/06/korzina-s-fruktami-i-citrusovymi-1.png",
+      "name": "Fruit"
+    },
+    {
+      "pk": 84,
+      "url_str": "https://sun6-20.userapi.com/s/v1/if1/NCfIPchZiworFCFaI1bTATfRnGKX_ntpH2FhDDC0GnoSpifKOuaXZB58FEkoQ5iz5m_EMAKN.jpg?size=1477x2016&quality=96&crop=71,71,1477,2017&ava=1",
+      "name": "Candy"
+    },
+    {
+      "pk": 83,
+      "url_str": "https://www.abcfws.com/ccstore/v1/images/?source=/file/v155616379300743302/products/530605.jpg&amp;height=300&amp;width=300",
+      "name": "Liquer"
+    },
+    {
+      "pk": 82,
+      "url_str": "https://i.pinimg.com/originals/eb/0d/79/eb0d79ebac92163af82334cca3aa00dd.png",
+      "name": "Whiskey"
+    },
+    {
+      "pk": 81,
+      "url_str": "https://artcafe-royal.ru/wp-content/uploads/6/1/4/6143aef838020c2720aa8334a872e259.jpeg",
+      "name": "Sambuca"
+    },
+    {
+      "pk": 80,
+      "url_str": "https://i.pinimg.com/736x/8d/74/e7/8d74e792c1cc6d6333fc1e7f3e04fadb--lime-wedge-cucumber-jalepeno-martini.jpg",
+      "name": "Garnish"
+    },
+    {
+      "pk": 79,
+      "url_str": "https://i.pinimg.com/736x/83/ef/e0/83efe0528e334b395ffafcd93e8041d9.jpg",
+      "name": "Beverage"
+    },
+    {
+      "pk": 78,
+      "url_str": "https://bestwine24.ru/image/cache/catalog/drinks/761ee66816e0fb3c7d2c4a7030f18080-540x720.jpg",
+      "name": "Liquor"
+    },
+    {
+      "pk": 77,
+      "url_str": "https://cdn.shopify.com/s/files/1/0316/6545/5163/products/8796948496414_1024x.jpg?v=1582941945",
+      "name": "Cider"
+    },
+    {
+      "pk": 76,
+      "url_str": "https://store.whisky-onlineauctions.com/media/catalog/product/1/6/167-1_21_1_2.jpg",
+      "name": "Brandy"
+    },
+    {
+      "pk": 75,
+      "url_str": "https://beermebc.com/wp-content/uploads/2013/08/2013_08_BMBC-7989.jpg",
+      "name": "Bitter"
+    },
+    {
+      "pk": 74,
+      "url_str": "https://bestwine24.ru/image/cache/catalog/drinks/761ee66816e0fb3c7d2c4a7030f18080-540x720.jpg",
+      "name": "Liqueur"
+    },
+    {
+      "pk": 73,
+      "url_str": "https://pluspng.com/img-png/beer-mug-png--1359.png",
+      "name": "Beer"
+    },
+    {
+      "pk": 72,
+      "url_str": "https://cdn.shopify.com/s/files/1/0565/1359/3522/products/e41hcx73sizue2u2wcxd.jpg?v=1638143430",
+      "name": "Syrup"
+    },
+    {
+      "pk": 71,
+      "url_str": "https://basket-04.wb.ru/vol527/part52711/52711312/images/big/1.jpg",
+      "name": "Whisky"
+    },
+    {
+      "pk": 70,
+      "url_str": "https://lenta.servicecdn.ru/globalassets/1/-/33/34/16/69894.png?preset=fulllossywhite",
+      "name": "Spirit"
+    },
+    {
+      "pk": 69,
+      "url_str": "https://sadovnic.su/wp-content/uploads/2164dbeb01499ed632093d47cd6c6509.jpg",
+      "name": "Rum"
+    },
+    {
+      "pk": 68,
+      "url_str": "https://veresk.com/sites/default/files/product/dzhin-gin-galoway-premium-quality-07_g_0.png",
+      "name": "Gin"
+    },
+    {
+      "pk": 67,
+      "url_str": "https://www.slavorum.org/wp-content/uploads/2018/05/kisspng-absolut-vodka-distilled-beverage-ubrwka-russia-absolut-5b31f2a1e03a71.6163931015300000339185.png",
+      "name": "Vodka"
+    },
+    {
+      "pk": 123,
+      "url_str": "https://ihlengesi.files.wordpress.com/2017/06/screenshot-2017-09-18-22-32-39.png?w=1200",
+      "name": "Seasoning"
+    },
+    {
+      "pk": 122,
+      "url_str": "https://static.silhouettedonna.it/wp-content/uploads/2015/05/erbe.png",
+      "name": "Herb"
+    },
+    {
+      "pk": 121,
+      "url_str": "https://c7.uihere.com/files/48/634/555/orange-juice-apple-juice-u0410u0411u041a-drink-fruit-juice.jpg",
+      "name": "Fruit Juice"
+    },
+    {
+      "pk": 119,
+      "url_str": "https://my-live.slatic.net/p/9128efa2fda2f26699da6d53b7c29aa1.jpg",
+      "name": "Vermouth"
+    }
+  ]
+}

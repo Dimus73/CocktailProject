@@ -44,6 +44,10 @@ class FavoriteCocktails(models.Model):
     strDrink                              =models.CharField (max_length=100, blank=True, null=True, db_index=True)
     original_dict                         =models.TextField()
 
+    def __str__(self):
+        return self.strDrink
+
+
 
 
 
