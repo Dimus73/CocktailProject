@@ -1,22 +1,20 @@
-{% extends 'cockteil/base.html' %}
+{% extends 'cockteil/block_cocktail.html' %}
  
-{% block content %}
+{% block top %}
 {% load static %}
+		<div class="container" style="z-index: 2;">
+			<div >
+				Today is {{day}} and here is the cocktail of the day:
+			</div>
+			<div >
+				But you can make your own <a href="{% url 'favorites_path' %}"> choice </a>	
+			</div>
+			<h1>{{ title }}</h1>
+			<div class="row">
+					<div class="col">
+{% endblock %}
 
-<div class="container-fluid ">
-		<img style="width: 100 wv;" src="{% static 'cockteil/imag/fon2.jpg' %}" alt="" width="100%">
-</div>
-
-<div class="container" style="z-index: 2;">
-	<div >
-		Today is {{a}} and here is the cocktail of the day:
-	</div>
-	<div >
-		But you can make your own <a href="{% url 'favorites_path' %}"> choice </a>	
-	</div>
-	<h1>{{title}}</h1>
-		<div class="row">
-			<div class="col">
+{% block bottom %}
 				<p>       </p>
 			</div>
 	</div>
