@@ -187,3 +187,32 @@ def cocktail(request, idDrink):
     cock_list['ks'].append(cock)
     context={'menu': menu, 'title':cock_list['ks'][0]['name'], "d_list": cock_list}
     return render(request, 'cockteil/cocktail.html', context)
+
+def my_bar(request):
+    if request.method == 'POST':
+        form_info = request.POST
+        print (form_info)
+        bar = Ownbar.objects.all()
+        for b in bar:
+            v_key = 'v'+str(b.pk)
+            c_key = 'c'+str(b.pk)
+            if form_info.get(v_key,False):
+                if b.quantity != int(form_info[v_key]):
+                    print("Вносим", type(form_info[v_key]),form_info[v_key])
+                    b.quantity = int(form_info[v_key])
+                    b.save()
+            if form_info.get(c_key,False):
+                b.delete()
+        # try:
+        #     c = FavoriteCocktails.objects.get(idDrink=del_id)
+        #     c.delete()
+        # except FavoriteCocktails.DoesNotExist:
+        #     pass
+
+    bar = Ownbar.objects.all()
+    # print (bar)
+
+    title = "My bar"
+    button_in_list=True
+    context = {'menu': menu, 'title':title, 'bar':bar, 'button_in_list':button_in_list}
+    return render(request, 'cockteil/bar.html', context)

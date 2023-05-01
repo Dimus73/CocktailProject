@@ -25,4 +25,5 @@ urlpatterns = [
     path('favorites/', views.favorites, name="favorites_path" ),
     path('ingradients_list/<int:idIngredient>', views.ingredient, name="ingradient_path"),
     path('search_cocktail/<int:idDrink>', views.cocktail, name="cocktail_path"),
+    path('bar/', views.my_bar, name="bar_path"),
 ]
