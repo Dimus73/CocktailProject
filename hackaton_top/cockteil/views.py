@@ -87,6 +87,8 @@ def search_cocktail(request):
         request_data = request.POST
         print (request_data)
 
+        transit={'cocktail_part_name':request_data.get('cocktail_part_name',False), 'ingradient':request_data.get('ingradient',False)}
+
         if request_data.get('cocktail_part_name',False):
             print ("***********Зашли в выбор названию")
             url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
@@ -96,7 +98,7 @@ def search_cocktail(request):
         else:
             f_n = CocktailSerchNameForm()
             search_list=""
-            transit={}
+            # transit={}
 
 
         if request_data.get('ingradient',False):
@@ -112,21 +114,23 @@ def search_cocktail(request):
         else:
             f_i = CocktailSerchIngradientForm()
             search_list=""
-            transit={}
+            # transit={}
 
 
         if request_data.get('add_to_base',False):
             print ("***********Зашли в добавление в базу")
+            url_coct = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
+            param_coct = {'i':int(request_data['add_to_base'])}
+            coct_info=get_outside_request(url_coct, param_coct)
             try:
-                url_coct = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
-                param_coct = {'i':int(request_data['add_to_base'])}
-                coct_info=get_outside_request(url_coct, param_coct)
-                a = FavoriteCocktails(idDrink = coct_info['drinks'][0]['idDrink'],
-                                      strDrink = coct_info['drinks'][0]['strDrink'] , 
-                                      original_dict = json.dumps(coct_info['drinks'][0], indent=2))
-                a.save()
+                FavoriteCocktails.objects.get(strDrink = coct_info['drinks'][0]['strDrink'])
+                print("This cockteil in db. Adding interuption")
             except FavoriteCocktails.DoesNotExist:
-                print ("Не получилось записать в базу любымый коктель")
+                a = FavoriteCocktails(idDrink = coct_info['drinks'][0]['idDrink'],
+                                    strDrink = coct_info['drinks'][0]['strDrink'] , 
+                                    original_dict = json.dumps(coct_info['drinks'][0], indent=2))
+                a.save()
+                print("This cockteil added to db.")
                 
 
         if request_data.get('clear_n',False) or request_data.get('clear_i',False):
@@ -156,11 +160,11 @@ def favorites(request):
         del_id = int(request.POST['button_id'])
         print (del_id)
         try:
-            c = FavoriteCocktails.objects.get(idDrink=del_id)
-            c.delete()
+            del_list = FavoriteCocktails.objects.filter(idDrink=del_id)
+            for c in del_list:
+                c.delete()
         except FavoriteCocktails.DoesNotExist:
             pass
-
     cock={}
     cock_list={'ks':[]}
     cock_data = FavoriteCocktails.objects.all()
