@@ -8,7 +8,7 @@ from cockteil.functions import cockteil_info
 
 menu = [{'title': "Home", 'url_name': 'main_page_path'},
         {'title': "Ingredients", 'url_name': 'ingradients_list_path'},
-        {'title': "Cocktail search", 'url_name': 'search_cocktail_path'},
+        {'title': "Cocktails search", 'url_name': 'search_cocktail_path'},
         {'title': "Favorites", 'url_name': 'favorites_path'}
         ]
 
@@ -16,15 +16,16 @@ menu = [{'title': "Home", 'url_name': 'main_page_path'},
 # Create your views here.
 # *********************
 
-
 def main_page(request):
+    cock_list={'ks':[]}
     url_coct = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
     param_coct = {'i':0}
     cocktail_recip=get_outside_request(url_coct, param_coct)
-    cock_list = cockteil_info(cocktail_recip['drinks'][0])
-    print (cock_list)
+    cock = cockteil_info(cocktail_recip['drinks'][0])
+    print (cock)
+    cock_list['ks'].append(cock)
     day = datetime.date.today().strftime("%d-%m-%y")
-    context = {'menu': menu, 'day':day, 'title':cock_list['name'], 'content':cock_list }
+    context = {'menu': menu, 'day':day, 'title':cock_list['ks'][0]['name'], "d_list":cock_list }
     return render(request, 'cockteil/main_page.html', context)
 
 def ingradients_list(request):
@@ -64,7 +65,7 @@ def ingradients_list(request):
        ingr_list = Ingredients.objects.all()
        f=SetSearchForm()
        transit={'ingradient_name':'', 'categories':'', 'only_bar':False}
-    title = "Ingradients list"
+    title = "Ingredients list"
     context = {'menu': menu, 'title':title, 'ingr_list':ingr_list, 'form':f, 'transit':transit}
     return render(request, 'cockteil/ingradients_list.html', context)
 
@@ -94,6 +95,9 @@ def search_cocktail(request):
             transit={'cocktail_part_name':request_data['cocktail_part_name'], 'ingradient':''}
         else:
             f_n = CocktailSerchNameForm()
+            search_list=""
+            transit={}
+
 
         if request_data.get('ingradient',False):
             print ("***********Зашли в выбор инградиенту")
@@ -107,6 +111,9 @@ def search_cocktail(request):
                 pass
         else:
             f_i = CocktailSerchIngradientForm()
+            search_list=""
+            transit={}
+
 
         if request_data.get('add_to_base',False):
             print ("***********Зашли в добавление в базу")
@@ -114,7 +121,6 @@ def search_cocktail(request):
                 url_coct = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php'
                 param_coct = {'i':int(request_data['add_to_base'])}
                 coct_info=get_outside_request(url_coct, param_coct)
-                print("**************** Запро конкретного коктеляё\n",coct_info)
                 a = FavoriteCocktails(idDrink = coct_info['drinks'][0]['idDrink'],
                                       strDrink = coct_info['drinks'][0]['strDrink'] , 
                                       original_dict = json.dumps(coct_info['drinks'][0], indent=2))
@@ -128,10 +134,9 @@ def search_cocktail(request):
             transit={}
             f_n = CocktailSerchNameForm()
             f_i = CocktailSerchIngradientForm()
-
         else:
-            search_list=get_outside_request(url, param)
-        print("***********Прошли ифы")
+            if request_data.get('cocktail_part_name',False) or request_data.get('ingradient',False):
+                search_list=get_outside_request(url, param)
 
     else:
         search_list=""
@@ -139,9 +144,7 @@ def search_cocktail(request):
         f_n = CocktailSerchNameForm()
         f_i = CocktailSerchIngradientForm()
 
-            
-
-    title = "Search cockteil page"
+    title = "Cocktails search"
 
     f = {'f_n':f_n, 'f_i':f_i}
     context = {'menu': menu, 'title':title, 'search_list':search_list, 'form':f, 'transit':transit}
@@ -149,18 +152,26 @@ def search_cocktail(request):
 
 
 def favorites(request):
+    if request.method == 'POST':
+        del_id = int(request.POST['button_id'])
+        print (del_id)
+        try:
+            c = FavoriteCocktails.objects.get(idDrink=del_id)
+            c.delete()
+        except FavoriteCocktails.DoesNotExist:
+            pass
+
     cock={}
     cock_list={'ks':[]}
     cock_data = FavoriteCocktails.objects.all()
     for k in cock_data:
-        print ("*************\n",k.original_dict,"\n********************")
         s_js= json.loads(k.original_dict)
         cock = cockteil_info (s_js)
         cock_list['ks'].append(cock)
-    title = "Favorits cockteil page"
-    context = {'menu': menu, 'title':title, 'd_list':cock_list}
+    title = "Favorite cocktails"
+    button_in_list=True
+    context = {'menu': menu, 'title':title, 'd_list':cock_list, 'button_in_list':button_in_list}
     return render(request, 'cockteil/favorites.html', context)
-
 
 def ingredient(request, idIngredient):
     a=Ingredients.objects.get(pk=idIngredient)
@@ -168,9 +179,11 @@ def ingredient(request, idIngredient):
     return render(request, 'cockteil/ingredient.html', context)
 
 def cocktail(request, idDrink):
+    cock_list={'ks':[]}
     url="https://www.thecocktaildb.com/api/json/v1/1/lookup.php"
     param = {'i':idDrink}
     cocktail_recip=get_outside_request(url, param)
-    cock_list = cockteil_info(cocktail_recip['drinks'][0])
-    context={'menu': menu, 'title':cock_list['name'], "content": cock_list}
+    cock = cockteil_info(cocktail_recip['drinks'][0])
+    cock_list['ks'].append(cock)
+    context={'menu': menu, 'title':cock_list['ks'][0]['name'], "d_list": cock_list}
     return render(request, 'cockteil/cocktail.html', context)

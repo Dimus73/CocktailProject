@@ -1,6 +1,7 @@
 def cockteil_info (cocktail_recipe):
     
     cock_list={}
+    cock_list['idDrink']      = cocktail_recipe['idDrink']
     cock_list['name']         = cocktail_recipe['strDrink']
     cock_list['type']         = cocktail_recipe['strCategory']
     cock_list['alcohol']      = cocktail_recipe['strAlcoholic']

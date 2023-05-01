@@ -6,53 +6,61 @@
 	{% endblock %}
 
 {% block cockteil %}
-<div class="row">
-	<div class="col-md-4 col-sm-12">
-		<img class="img-thumbnail" width="100%" src="{{content.image}}" alt="No image">
-	</div>
-	<div class="col-md-8 col-sm-12">
-		<table class="table bg-light">
-			<tbody>
-				<tr>
-					<td><b>Name</b></td>
-					<td>{{ content.name }}</td>
-				</tr>
-				<tr>
-					<td><b>Category</b></td>
-					<td>{{ content.type }}</td>
-				</tr>
-				<tr>
-					<td><b>Alcoholic</b></td>
-					<td>{{ content.alcohol }}</td>
-				</tr>
-				<tr>
-					<td><b>Glass</b></td>
-					<td>{{content.glass}}</td>
-				</tr>
-				<tr>
-					<td><b>Instructions</b></td>
-					<td>{{content.instructions}}</td>
-				</tr>
-				<tr>
-					<td><b>Ingredients</b></td>
-					<td>
-						<table class="table">
-							{% for key, val in content.ingradient.items %}
-								<tr>
-									<td>{{key}}</td>
-									<td>{{val}}</td>
-								</tr>
-							{% endfor %}
-						</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
+	{% for content in d_list.ks %}
+		<div class="row">
+			<div class="col-md-4 col-sm-12">
+				<img class="img-thumbnail" width="100%" src="{{content.image}}" alt="No image">
+				{% if button_in_list %}
+					<form class=" pt-2 " action="{% url 'favorites_path' %}" method = "post">
+						{% csrf_token %}
+						<button class="btn btn-info btn-primary" type="submit" value="{{content.idDrink}}" name="button_id">  Remove from favorites </button>
+					</form>
+				{% endif %}
+			</div>
+			<div class="col-md-8 col-sm-12">
+				<table class="table bg-light">
+					<tbody>
+						<tr>
+							<td><b>Name</b></td>
+							<td>{{ content.name }}</td>
+						</tr>
+						<tr>
+							<td><b>Category</b></td>
+							<td>{{ content.type }}</td>
+						</tr>
+						<tr>
+							<td><b>Alcoholic</b></td>
+							<td>{{ content.alcohol }}</td>
+						</tr>
+						<tr>
+							<td><b>Glass</b></td>
+							<td>{{content.glass}}</td>
+						</tr>
+						<tr>
+							<td><b>Instructions</b></td>
+							<td>{{content.instructions}}</td>
+						</tr>
+						<tr>
+							<td><b>Ingredients</b></td>
+							<td>
+								<table class="table">
+									{% for key, val in content.ingradient.items %}
+										<tr>
+											<td>{{key}}</td>
+											<td>{{val}}</td>
+										</tr>
+									{% endfor %}
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	{% endfor %}
 {% endblock %}
 
-{% block bottem%}
+{% block bottom %}
 {% endblock %}
 
 {% endblock %}
