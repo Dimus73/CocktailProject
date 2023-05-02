@@ -3,11 +3,11 @@
 {% block top %}
 		<div class="container" style="z-index: 2;">
 			<div >
-				<h1 class="mt-5">
-					Today is {{day}} <br> And here is the cocktail of the day: <br>
-			  </h1>
-				<h5 class="text-info">
-					But you can make your own <a class="text-info" href="{% url 'favorites_path' %}"> choice </a>	
+				<h2 class="mt-5">
+					Today is {{day}}.  And here is the cocktail of the day: <br>
+			  </h2>
+				<h5  style="color: gray;">
+					But you can make your own <a style="color: gray;" href="{% url 'favorites_path' %}"> choice </a>	
 				</h5>
 							</div>
 			<div class="row">

@@ -6,7 +6,7 @@ import json
 import datetime
 from cockteil.functions import cockteil_info
 
-menu = [{'title': "Home", 'url_name': 'main_page_path'},
+menu = [{'title': "Bar", 'url_name': 'bar_path'},
         {'title': "Ingredients", 'url_name': 'ingradients_list_path'},
         {'title': "Cocktails search", 'url_name': 'search_cocktail_path'},
         {'title': "Favorites", 'url_name': 'favorites_path'}
@@ -17,6 +17,7 @@ menu = [{'title': "Home", 'url_name': 'main_page_path'},
 # *********************
 
 def main_page(request):
+    week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', "Friday", 'Saturday', 'Sunday']
     cock_list={'ks':[]}
     url_coct = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
     param_coct = {'i':0}
@@ -24,7 +25,7 @@ def main_page(request):
     cock = cockteil_info(cocktail_recip['drinks'][0])
     print (cock)
     cock_list['ks'].append(cock)
-    day = datetime.date.today().strftime("%d-%m-%y")
+    day = week[datetime.date.today().weekday()]
     context = {'menu': menu, 'day':day, 'title':cock_list['ks'][0]['name'], "d_list":cock_list }
     return render(request, 'cockteil/main_page.html', context)
 
@@ -207,14 +208,8 @@ def my_bar(request):
                     b.save()
             if form_info.get(c_key,False):
                 b.delete()
-        # try:
-        #     c = FavoriteCocktails.objects.get(idDrink=del_id)
-        #     c.delete()
-        # except FavoriteCocktails.DoesNotExist:
-        #     pass
 
-    bar = Ownbar.objects.all()
-    # print (bar)
+    bar = Ownbar.objects.all().order_by('ingradient__name')
 
     title = "My bar"
     button_in_list=True
