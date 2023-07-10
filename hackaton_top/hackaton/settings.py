@@ -76,17 +76,27 @@ WSGI_APPLICATION = 'hackaton.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = { 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cocktail',
+#         'USER': 'dmitryprigozhin',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cocktail',
-        'USER': 'dmitryprigozhin',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'USER': 'cocktail_user',
+        'PASSWORD': 'k2NMuLIbCWpqutiRRt32s60VqHxArN6l',
+        'HOST': 'dpg-cilq0amnqqlfm4cs4sl0-a.frankfurt-postgres.render.com',
         'PORT': '5432',
     }
 }
-
 
 
 # Password validation
