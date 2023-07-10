@@ -96,12 +96,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cocktail',
         'USER': 'cocktail_user',
-        'PASSWORD': 'k2NMuLIbCWpqutiRRt32s60VqHxArN6l',
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': 'dpg-cilq0amnqqlfm4cs4sl0-a.frankfurt-postgres.render.com',
         'PORT': '5432',
     }
 }
 
+# 'k2NMuLIbCWpqutiRRt32s60VqHxArN6l'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
